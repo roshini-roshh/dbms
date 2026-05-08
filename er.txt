@@ -1,0 +1,109 @@
+SELF-I
+1. Strong and Weak Entities
+Strong Entities
+These have their own primary key:
+•	Supplier 
+•	Quotation 
+•	Customer 
+•	Item 
+•	RetailOutlet 
+•	Employee 
+Weak Entity
+•	Dependent 
+o	Depends on Employee (identified via identifying relationship “has”) 
+o	Has no full key of its own → uses partial key + Employee key 
+________________________________________
+2. Key Attributes
+Supplier
+•	supplierid (PK) 
+•	suppliername, supplieremailid, suppliercontactno 
+Quotation
+•	quotationid (PK) 
+•	quotationdate, quotedprice, quotationstatus 
+Customer
+•	customerid (PK) 
+•	customername, emailid, customertype, contactno 
+Item
+•	itemcode (PK) 
+•	description, price, qtyonhand, reorderlevel, category 
+RetailOutlet
+•	retailoutletid (PK) 
+•	location (street, city, zipcode) 
+Employee
+•	empid (PK) 
+•	empname, contactno, emailid, password, salary, designation 
+Dependent (Weak Entity)
+•	Partial Key: name 
+•	Other attributes: sex, DOB, relationship 
+•	Full PK = (empid + name) 
+________________________________________
+3. Relationships → Tables / Foreign Keys
+1. Supplier — provides — Quotation (1:M)
+•	Add supplierid (FK) in Quotation 
+________________________________________
+2. Quotation — called for — Item (M:1)
+•	Add itemcode (FK) in Quotation 
+________________________________________
+3. Customer — purchases — RetailOutlet
+•	Relationship has attributes: billamount, billdate 
+•	This is M:N, so create a new table: 
+Purchases
+•	customerid (FK) 
+•	retailoutletid (FK) 
+•	billamount, billdate 
+•	PK: (customerid, retailoutletid, billdate) 
+________________________________________
+4. Item — outward — RetailOutlet (M:N)
+•	Create junction table: 
+Outward
+•	itemcode (FK) 
+•	retailoutletid (FK) 
+•	PK: (itemcode, retailoutletid) 
+________________________________________
+5. RetailOutlet — has — Employee (1:M)
+•	Add retailoutletid (FK) in Employee 
+________________________________________
+6. Employee — has — Dependent (1:M, identifying)
+•	Dependent table includes: 
+o	empid (FK) 
+o	name (partial key) 
+•	PK: (empid, name) 
+________________________________________
+4. Final Tables Count
+Entity Tables
+1.	Supplier 
+2.	Quotation 
+3.	Customer 
+4.	Item 
+5.	RetailOutlet 
+6.	Employee 
+7.	Dependent 
+Relationship Tables
+8.	Purchases 
+9.	Outward 
+Total Tables = 9
+________________________________________
+5. Primary Keys and Foreign Keys Count
+Primary Keys
+•	Supplier → 1 
+•	Quotation → 1 
+•	Customer → 1 
+•	Item → 1 
+•	RetailOutlet → 1 
+•	Employee → 1 
+•	Dependent → 1 (composite) 
+•	Purchases → 1 (composite) 
+•	Outward → 1 (composite) 
+Total PKs = 9
+________________________________________
+Foreign Keys
+•	Quotation → supplierid, itemcode → 2 
+•	Employee → retailoutletid → 1 
+•	Dependent → empid → 1 
+•	Purchases → customerid, retailoutletid → 2 
+•	Outward → itemcode, retailoutletid → 2 
+ Total FKs = 8
+
+
+
+
