@@ -1,0 +1,8 @@
+CREATE OR REPLACE TRIGGER trg_last_modified
+BEFORE UPDATE
+ON Employee
+FOR EACH ROW
+BEGIN
+    :NEW.last_modified := SYSTIMESTAMP;
+END;
+/
